@@ -60,16 +60,16 @@ hping3-static: byteorder.h $(OBJ)
 	$(CC) -static -o hping3-static $(CCOPT) $(DEBUG) $(OBJ) -L/usr/local/lib $(PCAP) @SOLARISLIB@ @TCL_LIB@ -ldl
 
 byteorder.h:
-	./configure
+#	./configure
 
 .c.o:
 	$(CC) -c $(CCOPT) $(DEBUG) $(COMPILE_TIME) $<
 
 clean:
-	rm -rf hping3 *.o libars.a
+#	rm -rf hping3 *.o libars.a
 
 distclean:
-	rm -rf hping3 *.o byteorder byteorder.h systype.h Makefile libars.a .depend
+#	rm -rf hping3 *.o byteorder byteorder.h systype.h Makefile libars.a .depend
 
 install: hping3
 #	cp -f hping3 /usr/sbin/
