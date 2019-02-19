@@ -13,30 +13,30 @@ if [ "$1" = "--help" ]; then
 	exit 0
 fi
 
-CC=${CC:=cc}
+# CC=${CC:=cc}
 
-echo build byteorder.c...
-$CC byteorder.c -o byteorder || exit 1
+# echo build byteorder.c...
+# $CC byteorder.c -o byteorder || exit 1
 
 INSTALL_MANPATH=`echo $MANPATH|cut -f1 -d:`
 if [ "$INSTALL_MANPATH" = "" ]; then
 	INSTALL_MANPATH="/usr/local/man"
 fi
-BYTEORDER=`./byteorder -m`
+# BYTEORDER=`./byteorder -m`
 
-echo create byteorder.h...
-cat > byteorder.h <<EOF
-#ifndef __BYTEORDER_H
-#define __BYTEORDER_H
+# echo create byteorder.h...
+#cat > byteorder.h <<EOF
+##ifndef __BYTEORDER_H
+##define __BYTEORDER_H
+#
+#EOF
+#echo \#ifndef $BYTEORDER >> byteorder.h
+#echo \#define $BYTEORDER >> byteorder.h
+#echo \#endif /\* $BYTEORDER \*/ >> byteorder.h
+#cat >> byteorder.h <<EOF
 
-EOF
-echo \#ifndef $BYTEORDER >> byteorder.h
-echo \#define $BYTEORDER >> byteorder.h
-echo \#endif /\* $BYTEORDER \*/ >> byteorder.h
-cat >> byteorder.h <<EOF
-
-#endif /* __BYTEORDER_H */
-EOF
+##endif /* __BYTEORDER_H */
+#EOF
 
 CONFIGOSTYPE=`uname -s | tr [a-z] [A-Z]`
 if [ ! "$CONFIGOSTYPE" ]; then
@@ -63,7 +63,7 @@ esac
 #
 for TCLPATH_TRY in "/usr/bin/" "/usr/local/bin/" "/bin/"
 do
-	for TCLVER_TRY in "8.4" "8.3" "8.2" "8.1" "8.0"
+	for TCLVER_TRY in "8.6" "8.5" "8.4" "8.3" "8.2" "8.1" "8.0"
 	do
 		if [ -z $TCLSH ]
 		then
@@ -98,7 +98,8 @@ then
 fi
 if [ -n $USE_TCL ]
 then
-	LIBPOSTFIX=`ls -1 /usr/local/lib/ /usr/lib | grep 'libtcl[0-9]' | grep so | sed -e 's/\.so.*//g' -e 's/libtcl//g' | sort -r | head -1`
+	LIBPOSTFIX=8.6
+# `ls -1 /usr/local/lib/ /usr/lib | grep 'libtcl[0-9]' | grep so | sed -e 's/\.so.*//g' -e 's/libtcl//g' | sort -r | head -1`
 	TCL_LIB="-ltcl${LIBPOSTFIX} -lm -lpthread"
 fi
 
